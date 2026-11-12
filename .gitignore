@@ -1,0 +1,42 @@
+# Dependencies and compiled output
+node_modules/
+dist/
+dist-ssr/
+coverage/
+*.tsbuildinfo
+
+# Original development sandbox: separate Git repository, retained locally
+/Visual-Testing/
+
+# Local tools, design previews, captures and agent state
+.colabsync/
+.impeccable/
+.codex/
+.agents/
+output/
+playwright-report/
+test-results/
+*.log
+*.local
+
+# Authoring inputs are retained locally; publish runtime assets in public/
+raw_assets/
+*.blend
+*.blend1
+*.stl
+__pycache__/
+*.pyc
+
+# Environment files and machine-specific settings
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

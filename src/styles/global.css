@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'JournalSans', system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  background-color: #152826;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Shared recovery states; expedition components own their visual surfaces. */
+.app-loading { min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: #14232b; color: #f4ecd9; font-family: 'Segoe UI', sans-serif; }
+.app-loading h1 { font-family: Georgia, serif; font-size: clamp(28px, 3vw, 44px); font-weight: 400; margin: 0; }
+.app-loading p { color: #d2c7ae; }
+.app-loading button { padding: 12px 20px; border: 1px solid #ab9f82; border-radius: 4px; background: transparent; color: #f4ecd9; cursor: pointer; }
+.app-loading button:focus-visible { outline: 3px solid #dfb77b; outline-offset: 4px; }
+.app-loading-orbit { width: 50px; height: 50px; border: 1px solid #bc9b62; border-radius: 50%; position: relative; }
+.app-loading-orbit::after { content: ''; width: 9px; height: 9px; background: #dfb77b; border-radius: 50%; position: absolute; left: 20px; top: -4px; }
+.app-storage-notice { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 100; margin: 0; padding: 10px 18px; max-width: min(620px, 90vw); background: #f4ecd9; color: #253b42; font: 14px/1.4 'Segoe UI', sans-serif; box-shadow: 0 4px 20px #0003; }
+
