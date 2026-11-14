@@ -116,6 +116,18 @@ components:
 
 # Design System: Off-world Expedition Journal
 
+## Approved library and rewards implementation — 14 November 2026
+
+The active entry is the approved three-book Figma library, implemented in `ExpeditionLibrary` and `BookCover`. Cover text, binding, foil rules and local SVG art are independent layers. Lunar grey `#454a48`, rust `#783d2c` and midnight blue `#172b43` distinguish volumes. Selection moves a book left with a short layout animation, changes the background and exposes an explicit Open action. `BookReader` provides an independently saved introduction/story/science/briefing journey. Warm-paper spreads, 17px prose, source captions and stacked narrow layouts preserve the journal identity.
+
+`offworld.css` owns shared library, reading and science patterns. `rewards.css` owns native dialogs, physical Backpack layers, filters/progress, the fixed mobile launcher rail and collectible treatments. Existing self-hosted DM Serif Display / DM Sans files are reused. Bright conic foil is concentrated on rewards.
+
+`MissionCollectibleCard` keeps art, title/facts, enamel, foil, seal and accomplishments separate. Full cards use a 360 × 600 base; compact tiles adapt to the grid. Locked/unlocked, first reward, selected detail, focus, hover and scientific reverse derive from state. Matching optimized alpha shells sit under live Backpack navigation, brand and decorative book patches. Three playable missions produce exactly three obtainable cards.
+
+Native dialogs provide focus containment and Escape. The launcher/selected card regains focus on return. Opening collection releases mouse capture, pauses movement and suspends the exploration animation loop; return requires explicit resume. System reduced motion disables decorative effects and offers instant signal arrival or a labelled journey slider.
+
+The earlier sections below document the single-journal baseline. See [the implementation handoff](docs/implementation-2026-11-14.md) for active components, verification and differences from Figma.
+
 ## Overview
 
 **Creative North Star: "The Expedition Journal"**

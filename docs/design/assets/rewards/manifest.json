@@ -1,0 +1,59 @@
+{
+  "createdLocalDate": "2026-11-14",
+  "generator": "built-in ImageGen",
+  "purpose": "Design review assets, not installed application assets",
+  "artworkEvidence": "Reconstruction",
+  "files": [
+    {
+      "file": "curiosity-sky-crane-illustration.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "bytes": 2264226,
+      "sha256": "7f87e7e5b4e4a32623cff26edee55d83f5820eb70e226cf954bdafef0090ca7a",
+      "alpha_range": null
+    },
+    {
+      "file": "offworld-backpack-open-shell.png",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "bytes": 3289933,
+      "sha256": "efd5685f21c2c993ea84b281b8fca9d916b9a41060fdeba13b0e180731c2ffa1",
+      "alpha_range": [
+        0,
+        254
+      ]
+    },
+    {
+      "file": "offworld-backpack-shell.png",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "bytes": 3457378,
+      "sha256": "fd4d8a7faf94f9a6215f2ad8e7543b78d997ebbb9ce6df98428fe44270cc1e28",
+      "alpha_range": [
+        0,
+        254
+      ]
+    },
+    {
+      "file": "pioneer-10-illustration.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "bytes": 1949986,
+      "sha256": "9f1bf7bde6c12eadff8eebfb867ad0900879c981013541190c286f1c9c29e2c6",
+      "alpha_range": null
+    },
+    {
+      "file": "surveyor-camera-illustration.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "bytes": 2385270,
+      "sha256": "c98596b2855e893483f1e348b7398b523f5630416dcd8899a92849e62e27383d",
+      "alpha_range": null
+    }
+  ]
+}

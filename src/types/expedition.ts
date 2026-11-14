@@ -1,5 +1,8 @@
-export type MissionId = 'surveyor' | 'curiosity' | 'pioneer';
-export type EvidenceKind = 'Historical record' | 'Reconstruction' | 'Fictional expedition';
+export type MissionId = "surveyor" | "curiosity" | "pioneer";
+export type EvidenceKind =
+  | "Historical record"
+  | "Reconstruction"
+  | "Fictional expedition";
 
 export interface MissionSource {
   id: string;
@@ -56,6 +59,29 @@ export interface MissionProgress {
 }
 
 export type ExpeditionProgress = Record<MissionId, MissionProgress>;
+
+export type CardId =
+  | "surveyor-camera"
+  | "curiosity-skycrane"
+  | "pioneer-messenger";
+export interface CollectionMetadata {
+  earnedAt: string | null;
+  firstViewedAt: string | null;
+  origin: "mission-completion" | "legacy-completion";
+}
+export interface OptionalAttempt {
+  answer: number | null;
+  attempts: number;
+  correct: boolean;
+}
+export interface SavedExpedition {
+  version: 2;
+  progress: ExpeditionProgress;
+  lastMissionId?: MissionId;
+  readingLocations: Record<MissionId, number>;
+  collection: Partial<Record<CardId, CollectionMetadata>>;
+  optionalAttempts: Partial<Record<MissionId, OptionalAttempt>>;
+}
 
 export interface MissionWorldProps {
   mission: ExpeditionMission;

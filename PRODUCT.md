@@ -12,7 +12,7 @@ School-age space enthusiasts aged 12–16. First release targets desktop compute
 
 ## Product Purpose
 
-An interactive expedition journal introduces NASA hardware and the science it enabled through a page-turning book and three explorable 3D episodes.
+An interactive expedition library introduces NASA hardware and the science it enabled through three independent books, lightweight scientific investigations, three explorable 3D episodes, evidence conclusions and a persistent collectible Backpack.
 
 ## Operating Context
 
@@ -20,7 +20,7 @@ NASA Space Apps demonstration by a five-member team including a 3D artist. Missi
 
 ## Capabilities and Constraints
 
-Closed book, introduction, contents, mission briefings, first-person surface exploration, overhead inspection, deep-space jetpack EVA, proximity inspection, historical archives, evidence tasks, journal progress, and source links. Curiosity is built first; Surveyor 3/Apollo 12 and Pioneer 10 are provisional companions. The original simulator is preserved in the ignored local `Visual-Testing/` archive; the active application is organized by feature at the repository root. Separate content from shared interaction systems.
+Implemented release: Moon / Surveyor 3–Apollo 12, Mars / Curiosity and Outer Space / Pioneer 10. Each has an introduction, sourced story, scientific investigation and mission briefing. Existing walking/EVA, orbit inspection, historical archives and evidence tasks remain. Three completion-derived cards, optional reinforcement and the Space Backpack extend the same versioned save. Detailed DEM terrain, cinematic EDL, a high-detail recovered-camera model and additional missions remain deferred. The original simulator and sibling `Visual-Testing` repository remain read-only technical references. See `docs/implementation-2026-11-14.md` for verification and limits.
 
 ## Brand Commitments
 

@@ -1,0 +1,50 @@
+[
+  {
+    "file": "images/rewards/curiosity-sky-crane-illustration.webp",
+    "source": "docs/design/assets/rewards/curiosity-sky-crane-illustration.png",
+    "bytes": 83306,
+    "sha256": "46539cbf620e1cd933d751849bc7a829fb32e657da3487c4dc6efa0631cfda79"
+  },
+  {
+    "file": "images/rewards/offworld-backpack-open-shell.webp",
+    "source": "docs/design/assets/rewards/offworld-backpack-open-shell.png",
+    "bytes": 200212,
+    "sha256": "0e9cfa5dada0502f77daa311d51d9c0765fee4073dd6ba09d27788d85ed42abb"
+  },
+  {
+    "file": "images/rewards/offworld-backpack-shell.webp",
+    "source": "docs/design/assets/rewards/offworld-backpack-shell.png",
+    "bytes": 228970,
+    "sha256": "3aeb2a6dc5351cb6b7e0e00e3929872441678fe1638547584b2c9eb596540210"
+  },
+  {
+    "file": "images/rewards/pioneer-10-illustration.webp",
+    "source": "docs/design/assets/rewards/pioneer-10-illustration.png",
+    "bytes": 34860,
+    "sha256": "50369de22b2a9d2912d0ada1f30668571331b4ce0a1d4c06fda80627d5ca4b89"
+  },
+  {
+    "file": "images/rewards/surveyor-camera-illustration.webp",
+    "source": "docs/design/assets/rewards/surveyor-camera-illustration.png",
+    "bytes": 80756,
+    "sha256": "8b9ad974179e32ad0898d7790580e288dd4cb79ee08314b7dd7e6b5ee0d53fa4"
+  },
+  {
+    "file": "images/history/apollo12.webp",
+    "source": "apollo12.jpg (NASA source ledger)",
+    "bytes": 92600,
+    "sha256": "d034e9d99063d85b1a36921fbff74f636f7ea4bec961f1938341287efe772036"
+  },
+  {
+    "file": "images/history/curiosity-hardware.webp",
+    "source": "curiosity-hardware.jpg (NASA source ledger)",
+    "bytes": 118262,
+    "sha256": "902391a31478fb6b1dd93eaa5f67a77300121bbeefff2f1874d98239f6e482d0"
+  },
+  {
+    "file": "images/history/pioneer-concept.webp",
+    "source": "pioneer-concept.jpg (NASA source ledger)",
+    "bytes": 177356,
+    "sha256": "09c94ead936402a628bcac8078d96fc0f7722e67311d749ebc920c4c58a6bbc6"
+  }
+]

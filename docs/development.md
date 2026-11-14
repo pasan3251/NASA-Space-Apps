@@ -4,14 +4,21 @@ The active application lives at the repository root. `Visual-Testing/` is the or
 
 ## Boundaries
 
-- `src/features/book/` owns the book, page navigation and briefing presentation.
+On Windows, stop running development and preview servers with Ctrl+C before installing dependencies. Vite/esbuild and Rollup can hold native binaries open, causing EPERM during npm cleanup. Use `npm ci` for a reproducible install from the existing lockfile; running `npm install` immediately before it is unnecessary. If an install fails midway, release the project’s running processes and rerun `npm ci` before starting Vite. Do not terminate unrelated Node processes.
+
+- `src/features/library/` owns the three-volume selection and layered book covers.
+- `src/features/book/BookReader.tsx` owns independent four-page readers and briefings. The former combined `BookExperience` is retained as unused reference code.
+- `src/features/science/` owns the Moon evidence comparison, Curiosity event stepper and Pioneer light-time interaction.
+- `src/features/collection/` and `src/features/rewards/` own the physical Backpack, layered cards, detail/reverse and reward/debrief flow.
 - `src/features/exploration/` owns spatial controls, discovery archives, tasks and scene geometry.
 - `src/data/expeditionMissions.ts` owns replaceable mission content and scientific references.
 - `src/types/expedition.ts` defines shared contracts.
-- `src/utils/expeditionProgress.ts` validates saved progress and invalidates it when content changes.
+- `src/utils/expeditionProgress.ts` validates version-2 saves, migrates known version-1 progress, derives unique rewards from completion and preserves earned cards across editorial changes.
 - `public/` contains only browser-served assets and their required licenses. Credits and source explanations live in `docs/`.
 
 Book content should remain independent of camera controls. Do not embed scientific claims in scene components when they belong in the mission records. Hardware, terrain and future conditions must be labeled according to their evidence level.
+
+See the [implementation handoff and verification record](implementation-2026-11-14.md) for the current release, Figma mapping, save behavior and remaining limits. Never use an editorial hash to reset all progress. A future material evidence change requires an explicit per-mission migration policy.
 
 ## Updating the demonstration
 

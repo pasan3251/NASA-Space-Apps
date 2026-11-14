@@ -1,6 +1,6 @@
 # Off-world — An Expedition Journal
 
-A desktop educational demonstration for NASA Space Apps, designed for ages 12–16. Open an illustrated storybook, explore NASA hardware through a fictional future expedition, and connect historical evidence to a scientific conclusion.
+A desktop-first educational demonstration for NASA Space Apps, designed for ages 12–16. Choose a Moon, Mars or Outer Space book, investigate science, explore NASA hardware through a fictional future expedition, and keep a collectible proof of your discoveries in the Space Backpack.
 
 This is the updated application in **pasan3251/NASA-Space-Apps**. Run commands from this repository's root.
 
@@ -57,11 +57,17 @@ Mission selections remain provisional until the competition briefing. The future
 
 ## Controls
 
-Book: buttons or left/right arrows, contents and journal shortcuts, optional reduced motion.
+Library: select a book, then choose Open. Tab, Enter and the book-selection arrow/Home/End keys work. Reading: page buttons or left/right arrows; each volume remembers its reading location. System reduced-motion preferences apply to books, scientific playback and rewards.
 
 Exploration: WASD move; drag to look or choose **Capture mouse**; C switches camera; J shows discoveries; F inspects nearby hardware; Escape releases the mouse or closes records. Pioneer jetpack: E/Space up, Q/Control down. Shift moves faster. The discovery list and travel shortcuts offer alternatives to precise movement.
 
-Inspect four records and answer the evidence question to complete a chapter. Progress is saved locally when browser storage is available. Changing mission content invalidates obsolete progress. Without WebGL, historical records and evidence tasks remain available. No audio is required.
+Inspect four records and answer the evidence question to complete a mission. Completion immediately earns its one persistent collectible; optional reinforcement can be retried or skipped. Open the Space Backpack from the screen edge to filter cards, inspect their reverse and sources, or return to a book. Escape closes details/the Backpack; exploration remains paused until you resume.
+
+Progress uses `offworld-expedition:v2` in localStorage and migrates valid `offworld-expedition:v1` saves without deleting the original. Editorial/art changes do not erase completion. Without WebGL, historical records and evidence tasks remain available. Denied storage supports the current session with a visible notice. No audio or account is required.
+
+The Pioneer book contains an original SVG light-time demonstration anchored to 23 January 2003, plus one-way/round-trip and reference-distance comparisons. It explicitly separates hypothetical signal propagation from successful historical contact.
+
+See [implemented features, validation and remaining work](docs/implementation-2026-11-14.md).
 
 ## Content, design and attribution
 

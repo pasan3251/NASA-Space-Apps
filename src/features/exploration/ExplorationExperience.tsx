@@ -13,6 +13,7 @@ interface ExplorationExperienceProps {
   onDiscover: (id: string) => void;
   onComplete: () => void;
   onExit: () => void;
+  suspended?: boolean;
 }
 
 type ViewMode = 'surface' | 'orbit';
@@ -182,7 +183,7 @@ function ArchiveRecord({ discovery, mission, onClose }: { discovery: Discovery; 
   </aside>;
 }
 
-export function ExplorationExperience({ mission, progress, onDiscover, onComplete, onExit }: ExplorationExperienceProps) {
+export function ExplorationExperience({ mission, progress, onDiscover, onComplete, onExit, suspended = false }: ExplorationExperienceProps) {
   const [mode, setMode] = useState<ViewMode>('surface');
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [showList, setShowList] = useState(true);
@@ -195,6 +196,7 @@ export function ExplorationExperience({ mission, progress, onDiscover, onComplet
   const sceneUnavailable = failedMissionId === mission.id;
   const [controlMessage, setControlMessage] = useState('');
   const [showHelp, setShowHelp] = useState(false);
+  const [resumeRequired, setResumeRequired] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const captureTimeoutRef = useRef<number | null>(null);
   const taskHeadingRef = useRef<HTMLHeadingElement | null>(null);
@@ -204,7 +206,8 @@ export function ExplorationExperience({ mission, progress, onDiscover, onComplet
   const count = mission.discoveries.filter(item => progress.discovered.includes(item.id)).length;
   const allDiscovered = count === mission.discoveries.length;
   const correct = answer === mission.task.correctIndex;
-  const paused = selectedId !== null || showTask || showHelp;
+  const paused = selectedId !== null || showTask || showHelp || suspended || resumeRequired;
+  useEffect(() => { if (suspended) { unlockPointer(); setResumeRequired(true); } }, [suspended]);
   const unavailable = useCallback(() => setFailedMissionId(mission.id), [mission.id]);
   const captureFallback = useCallback(() => {
     if (captureTimeoutRef.current !== null) window.clearTimeout(captureTimeoutRef.current);
@@ -252,6 +255,7 @@ export function ExplorationExperience({ mission, progress, onDiscover, onComplet
 
   useEffect(() => {
     const shortcut = (event: KeyboardEvent) => {
+      if (suspended) return;
       if ((event.target as HTMLElement | null)?.closest('input,textarea,select,[contenteditable="true"]') || event.ctrlKey || event.metaKey || event.altKey || event.repeat) return;
       if (event.code === 'KeyC' && !paused) { unlockPointer(); setMode(value => value === 'surface' ? 'orbit' : 'surface'); }
       if (event.code === 'KeyJ') { unlockPointer(); setShowList(value => !value); }
@@ -260,15 +264,17 @@ export function ExplorationExperience({ mission, progress, onDiscover, onComplet
     };
     window.addEventListener('keydown', shortcut);
     return () => window.removeEventListener('keydown', shortcut);
-  }, [inspect, nearbyItem, paused]);
+  }, [inspect, nearbyItem, paused, suspended]);
 
   const goTo = (discovery: Discovery) => {
+    setResumeRequired(false);
     unlockPointer(); setSelectedId(null); setShowTask(false); setShowHelp(false);
     setCommand({ serial: ++commandSerial.current, target: discovery.position });
   };
   const nextDiscovery = mission.discoveries.find(item => !progress.discovered.includes(item.id)) ?? mission.discoveries[0];
   const leave = () => { unlockPointer(); onExit(); };
   const startLooking = () => {
+    setResumeRequired(false);
     setControlMessage(''); setSelectedId(null); setShowTask(false); setShowHelp(false);
     if (mode === 'orbit') setMode('surface');
     const canvas = canvasRef.current;
@@ -287,7 +293,7 @@ export function ExplorationExperience({ mission, progress, onDiscover, onComplet
   return <main className={`exp-experience exp-${mission.id}`} style={{ '--exp-accent': mission.accent } as React.CSSProperties} aria-label={`${mission.name} exploration`}>
     <div className="exp-scene" aria-label="Reconstructed mission environment">
       <SceneBoundary key={mission.id} onUnavailable={unavailable}>
-        <Canvas shadows dpr={[1, 1.5]} camera={{ position: [0, mission.id === 'pioneer' ? 3 : 1.7, 14], fov: 58, near: 0.1, far: 180 }} onCreated={({ gl }) => { canvasRef.current = gl.domElement; setFailedMissionId(null); }} fallback={<NoWebGL />}>
+        <Canvas frameloop={suspended ? 'never' : 'always'} shadows dpr={[1, 1.5]} camera={{ position: [0, mission.id === 'pioneer' ? 3 : 1.7, 14], fov: 58, near: 0.1, far: 180 }} onCreated={({ gl }) => { canvasRef.current = gl.domElement; setFailedMissionId(null); }} fallback={<NoWebGL />}>
           <Suspense fallback={null}><MissionWorld mission={mission} selectedId={selectedId} discoveredIds={progress.discovered} onSelect={inspect} /></Suspense>
           <ExplorerCamera mission={mission} mode={mode} paused={paused} command={command} onNearby={setNearby} />
         </Canvas>
@@ -324,7 +330,7 @@ export function ExplorationExperience({ mission, progress, onDiscover, onComplet
           <p className="exp-record-summary">{mission.task.question}</p>
           <div className="exp-answer-list">{mission.task.options.map((option, index) => <button key={option} className={answer === index ? (index === mission.task.correctIndex ? 'exp-answer-correct' : 'exp-answer-incorrect') : ''} aria-pressed={answer === index} onClick={() => setAnswer(index)}><span>{String.fromCharCode(65 + index)}</span>{option}{answer === index && index === mission.task.correctIndex && <Check size={19} />}</button>)}</div>
           {answer !== null && <div className={`exp-task-feedback ${correct ? 'exp-feedback-correct' : ''}`} role="status"><strong>{correct ? 'The evidence supports your conclusion.' : 'Look again at the records.'}</strong><p>{correct ? mission.task.explanation : 'This conclusion goes beyond, or does not match, the evidence in your discoveries. You can reopen any record and try again.'}</p></div>}
-          {(correct || progress.completed) && <><h3>What remains</h3><p>{mission.legacy}</p><button className="exp-paper-action" onClick={() => { if (!progress.completed && correct) onComplete(); setShowTask(false); }}><Check size={17} />{progress.completed ? 'Return to exploration' : 'Save journal entry'}</button><button className="exp-text-button" onClick={() => { if (!progress.completed && correct) onComplete(); leave(); }}>Return to the book <ArrowRight size={16} /></button></>}
+          {(correct || progress.completed) && <><h3>What remains</h3><p>{mission.legacy}</p><button className="exp-paper-action" onClick={() => { onComplete(); setShowTask(false); }}><Check size={17} />{progress.completed ? 'Inspect collected reward' : 'Complete mission & reveal reward'}</button><button className="exp-text-button" onClick={() => { if (!progress.completed && correct) onComplete(); else leave(); }}>Return to the book <ArrowRight size={16} /></button></>}
         </>}
       </div>
     </aside>}
@@ -337,6 +343,7 @@ export function ExplorationExperience({ mission, progress, onDiscover, onComplet
     </footer>
     <div className="exp-scene-caption">{mission.sceneNote}</div>
     {controlMessage && <div className="exp-control-message" role="status">{controlMessage}<button onClick={() => setControlMessage('')} aria-label="Dismiss controls message"><X size={15} /></button></div>}
+    {resumeRequired && !suspended && <div className="exp-resume-notice"><p>Exploration paused. Your position and discoveries are preserved.</p><button onClick={() => setResumeRequired(false)}>Resume exploration</button></div>}
     {sceneUnavailable && <div className="exp-fallback-access"><List size={18} /><span>Archive mode · All discoveries and the evidence task remain available.</span><button onClick={() => setShowList(true)}>Show records</button></div>}
   </main>;
 }
